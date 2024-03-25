@@ -38,9 +38,38 @@
 
 
 // SECTION 35 DEFINING RESTFUL ROUTes
-import express from "express";
+const express = require("express");
 const app = express();
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+const path = require('path');
+
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs');
+
+
+const comment = [
+    {
+        username: "Todd",
+        comment: "Lol that was so funny"
+    },
+    {
+        username: "onlySayWoof",
+        comment: "woof woof woof"
+    },
+    {
+        username: "Layla",
+        comment: "Lol main Laila"
+    },
+    {
+        username: "Frodd",
+        comment: "Earth is triangle"
+    }
+]
+
+app.get('/comments', (req, res)=>{
+    res.render('comments/index', {comment})
+})
 
 
 app.get('/tacos', (req, res)=>{
